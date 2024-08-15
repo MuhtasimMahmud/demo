@@ -38,5 +38,4 @@ public class PropertyController {
         this.propertyService.delete(id);
         return allProperties();
     }
-
 }
