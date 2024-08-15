@@ -29,16 +29,16 @@ public class PropertyOwnerService {
         return repository.findAll();
     }
 
-    public PropertyOwner read(int id){
+    public PropertyOwner findOwner(int id){
         PropertyOwner owner = repository.findById(id);
         return owner;
     }
 
 
-    public PropertyOwner update(int id){
-        PropertyOwner owner = repository.findById(id);
+    public PropertyOwner update(PropertyOwner updatedOwner){
+        PropertyOwner owner = repository.findById(updatedOwner.getId());
         if(owner != null){
-            owner.setName("updating the new name");
+            owner.setName(updatedOwner.getName());
             try{
                 repository.save(owner);
             }catch (Exception exception){
@@ -46,6 +46,18 @@ public class PropertyOwnerService {
             }
         }
         return owner;
+    }
+
+
+    public void delete(int id) {
+        PropertyOwner owner = repository.findById(id);
+        if(owner != null){
+            try {
+                repository.delete(owner);
+            }catch (Exception exception){
+                exception.printStackTrace();
+            }
+        }
     }
 
 
