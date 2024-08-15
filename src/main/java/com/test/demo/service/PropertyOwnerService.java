@@ -5,6 +5,9 @@ import com.test.demo.repositories.OwnerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
 public class PropertyOwnerService {
 
@@ -20,6 +23,10 @@ public class PropertyOwnerService {
             }
         }
         return null;
+    }
+
+    public List<PropertyOwner> getAllOwners(){
+        return repository.findAll();
     }
 
     public PropertyOwner read(int id){
