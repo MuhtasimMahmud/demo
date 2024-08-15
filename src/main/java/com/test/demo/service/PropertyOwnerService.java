@@ -5,7 +5,6 @@ import com.test.demo.repositories.OwnerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -25,7 +24,7 @@ public class PropertyOwnerService {
         return null;
     }
 
-    public List<PropertyOwner> getAllOwners(){
+    public List<PropertyOwner> allOwners(){
         return repository.findAll();
     }
 
@@ -38,9 +37,8 @@ public class PropertyOwnerService {
     public PropertyOwner update(PropertyOwner updatedOwner){
         PropertyOwner owner = repository.findById(updatedOwner.getId());
         if(owner != null){
-            owner.setName(updatedOwner.getName());
             try{
-                repository.save(owner);
+                repository.save(updatedOwner);
             }catch (Exception exception){
                 exception.printStackTrace();
             }
@@ -54,6 +52,7 @@ public class PropertyOwnerService {
         if(owner != null){
             try {
                 repository.delete(owner);
+                System.out.println("property id : "+ id +" is deleted successfully");
             }catch (Exception exception){
                 exception.printStackTrace();
             }

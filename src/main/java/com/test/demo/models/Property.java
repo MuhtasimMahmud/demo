@@ -14,7 +14,6 @@ import lombok.NoArgsConstructor;
 public class Property {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String city;
     private double price;

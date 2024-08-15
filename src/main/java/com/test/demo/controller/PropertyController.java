@@ -3,15 +3,11 @@ package com.test.demo.controller;
 import com.test.demo.models.Property;
 import com.test.demo.service.PropertyService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@Controller
+@RestController
 public class PropertyController {
 
     @Autowired
@@ -19,14 +15,28 @@ public class PropertyController {
 
     @PostMapping("/addProperty")
     public Property addProperty(@RequestBody Property property){
-        return this.propertyService.addProperty(property);
+        return this.propertyService.save(property);
     }
 
-    @GetMapping("/allProperties")
+    @GetMapping("/properties")
     public List<Property> allProperties(){
         return this.propertyService.allProperties();
     }
 
+    @GetMapping("/properties/{id}")
+    public Property findProperty(@PathVariable int id){
+        return this.propertyService.findProperty(id);
+    }
 
+    @PutMapping("/updateProperty")
+    public Property updateProperty(@RequestBody Property property){
+        return this.propertyService.update(property);
+    }
+
+    @DeleteMapping("/deleteProperty/{id}")
+    public List<Property> deleteProperty(@PathVariable int id){
+        this.propertyService.delete(id);
+        return allProperties();
+    }
 
 }

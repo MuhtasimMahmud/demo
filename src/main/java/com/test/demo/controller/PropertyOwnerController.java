@@ -1,6 +1,5 @@
 package com.test.demo.controller;
 
-import com.test.demo.models.Property;
 import com.test.demo.models.PropertyOwner;
 import com.test.demo.service.PropertyOwnerService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +20,7 @@ public class PropertyOwnerController {
 
     @GetMapping("/owners")
     public List<PropertyOwner> owners(){
-        return this.propertyOwnerService.getAllOwners();
+        return this.propertyOwnerService.allOwners();
     }
 
     @GetMapping("/owners/{id}")
@@ -35,8 +34,8 @@ public class PropertyOwnerController {
     }
 
     @DeleteMapping("/deleteOwner/{id}")
-    public String deleteOwner(@PathVariable int id){
+    public List<PropertyOwner> deleteOwner(@PathVariable int id){
         this.propertyOwnerService.delete(id);
-        return "id : "+ id +" is deleted successfully";
+        return owners();
     }
 }
